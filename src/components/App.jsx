@@ -16,6 +16,7 @@ export default class App extends Component {
     };
 
     this.onAddClick = this.onAddClick.bind(this);
+    this.onDeleteclick = this.onDeleteclick.bind(this);
   }
 
 onAddClick(newItem) {
@@ -26,8 +27,10 @@ onAddClick(newItem) {
 
 // const variable can't update that value ( readonly variable ; let will let you change )
 onDeleteclick(id) {
-  const newItem = this.state.items.slice();
-  const index = newItem.map(x => x.id).indexOf(id);
+  const newItems = this.state.items.slice();
+  const index = newItems.map(x => x.id).indexOf(id);
+  newItems.splice(index, 1);
+  this.setState({ items: newItems });
 }
 
   render() {
@@ -36,7 +39,7 @@ onDeleteclick(id) {
         <h1>My Todo List</h1>
         <Header add={this.onAddClick}/>
         <hr/>
-        <List items={this.state.items}/>
+        <List delete={this.onDeleteclick} items={this.state.items}/>
       </div>
     );
   }

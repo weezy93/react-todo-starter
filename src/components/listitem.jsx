@@ -5,15 +5,21 @@ export default class ListItem extends Component {
     super(props);
 
     this.state = {
+      id: this.props.item.id,
       text: this.props.item.text,
       done: this.props.item.done,
     };
 
     this.onDoneChange = this.onDoneChange.bind(this);
+    this.onDeleteclick = this.onDeleteclick.bind(this);
   }
 
 onDoneChange() {
   this.setState({ done: event.target.checked });
+}
+
+onDeleteclick() {
+  this.props.delete(this.state.id);
 }
 
   render() {
@@ -36,7 +42,8 @@ onDoneChange() {
         <span className="input-group-btn">
           <button
             className="btn btn-danger"
-            enabled={this.this.state.done}
+            enabled={this.state.done}
+            onClick={this.onDeleteclick}
             >
           Delete
           </button>

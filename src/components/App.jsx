@@ -2,7 +2,8 @@ import React from 'react';
 
 // pull in something called component and assign to a variable called component
 import { Component } from 'react';
-import Header from './Header';
+import Header from './header';
+import List from './list';
 
 // allows it to use functions from component
 // every react component must have a render function
@@ -23,12 +24,19 @@ onAddClick(newItem) {
   });
 }
 
+// const variable can't update that value ( readonly variable ; let will let you change )
+onDeleteclick(id) {
+  const newItem = this.state.items.slice();
+  const index = newItem.map(x => x.id).indexOf(id);
+}
+
   render() {
-    console.log(this.state.items);
     return (
       <div className="text-center">
         <h1>My Todo List</h1>
         <Header add={this.onAddClick}/>
+        <hr/>
+        <List items={this.state.items}/>
       </div>
     );
   }
